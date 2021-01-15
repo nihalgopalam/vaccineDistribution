@@ -1,0 +1,60 @@
+%takes the info for persons name, health 
+%conditions, age, and occupation from a 
+%data set.
+
+%ex:nihal, asthma, 67, nurse
+name(nihal).
+health(nihal, asthma).
+age(nihal, 67).
+occupation(nihal, healthcare).
+
+%the health conditions with the highest 
+%risk from covid as per the CDC website
+healthRisk(cancer).
+healthRisk(kidneyDisease).
+healthRisk(copd).
+healthRisk(downSyndrome).
+healthRisk(heartConditions).
+healthRisk(immunocompromisedOrgan).
+healthRisk(obesity).
+healthRisk(pregnancy).
+healthRisk(sickleCell).
+healthRisk(smoker).
+healthRisk(type2Diabetes).
+healthRisk(asthma).
+healthRisk(cerebrovascular).
+healthRisk(cysticFibrosis).
+healthRisk(highBP).
+healthRisk(immunocompromised).
+healthRisk(neurological).
+healthRisk(liver).
+healthRisk(overweight).
+healthRisk(pulmonaryFibrosis).
+healthRisk(thalassemia).
+healthRisk(type1Diabetes).
+
+%some healthcare occupations that are 
+%under the constant danger of covid
+occupationRisk(healthcare).
+occupationRisk(education).
+occupationRisk(publicSaftey).
+
+%rank 1 = healthcare occupation, old, and serious health condition
+%rank 2 =  healthcare occupation, serious health condition
+%rank 2 =  healthcare occupation, old
+%rank 3 = old, serious health condition
+%rank 4 =  healthcare occupation
+%rank 5 = serious health condition
+%rank 5 = old
+
+rank5 :- name, age(X), X > 65.
+rank5 :- name, healthRisk.
+rank4 :- name, occupationRisk.
+rank3 :- name, age(X), X > 65, healthRisk.
+rank2 :- name, age(X), X > 65, occupationRisk.
+rank2 :- name, healthRisk, occupationRisk.
+rank1 :- name, age(X), X > 65, healthRisk, occupationRisk.
+
+
+
+
